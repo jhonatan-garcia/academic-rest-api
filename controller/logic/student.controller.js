@@ -12,7 +12,7 @@ exports.createStudent=(req,res,next)=>{
         lastname: req.body.lastname,
         email: req.body.email,
         phone: req.body.phone,
-        carrera: req.body.carrera
+        carrera: req.body.programId
     }
     studentDto.create(std, (err,data)=>{
         if(err){

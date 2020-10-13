@@ -5,26 +5,24 @@ const config= require("config")
 
 
 exports.createProgram=(req,res,next)=>{
-    facultyDto.getByCode({code: req.body.codeFaculty},(err,data)=>{
-        let program={
-            code: req.body.code,
-            name: req.body.name,
-            nameDirector: req.body.nameDirector,
-            idFaculty: data[0]._id
+    let program={
+        code: req.body.code,
+        name: req.body.name,
+        nameDirector: req.body.nameDirector,
+        idFaculty: req.body.idFaculty
+    }
+    programDto.create(program, (err,data)=>{
+        if(err){
+            return res.status(400).json({
+                error: err
+            })
         }
-        programDto.create(program, (err,data)=>{
-            if(err){
-                return res.status(400).json({
-                    error: err
-                })
+        res.status(201).json(
+            {
+                info:data
             }
-            res.status(201).json(
-                {
-                    info:data
-                }
-            )
-            
-        })
+        )
+        
     })
 }
 
